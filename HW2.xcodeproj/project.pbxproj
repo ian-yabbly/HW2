@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C380FA01819DA15003E5FB6 /* HW2PostFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C380F9F1819DA15003E5FB6 /* HW2PostFormViewController.m */; };
+		3C815C961818C89B003EFCD7 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C815C951818C89B003EFCD7 /* Post.m */; };
+		3C815C991818C89C003EFCD7 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C815C981818C89C003EFCD7 /* User.m */; };
 		3C89FC461818BCC400E954C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C89FC451818BCC400E954C2 /* Foundation.framework */; };
 		3C89FC481818BCC400E954C2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C89FC471818BCC400E954C2 /* CoreGraphics.framework */; };
 		3C89FC4A1818BCC400E954C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C89FC491818BCC400E954C2 /* UIKit.framework */; };
@@ -21,6 +24,9 @@
 		3C89FC671818BCC400E954C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C89FC491818BCC400E954C2 /* UIKit.framework */; };
 		3C89FC6F1818BCC400E954C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C89FC6D1818BCC400E954C2 /* InfoPlist.strings */; };
 		3C89FC711818BCC400E954C2 /* HW2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC701818BCC400E954C2 /* HW2Tests.m */; };
+		3C89FC821818C16700E954C2 /* HW2PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC811818C16700E954C2 /* HW2PostTableViewCell.m */; };
+		3C89FC851818C1CE00E954C2 /* HW2PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */; };
+		3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C380F9E1819DA15003E5FB6 /* HW2PostFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HW2PostFormViewController.h; sourceTree = "<group>"; };
+		3C380F9F1819DA15003E5FB6 /* HW2PostFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW2PostFormViewController.m; sourceTree = "<group>"; };
+		3C380FA11819F83A003E5FB6 /* HW2PostModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HW2PostModel.h; sourceTree = "<group>"; };
+		3C815C941818C89B003EFCD7 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		3C815C951818C89B003EFCD7 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		3C815C971818C89C003EFCD7 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3C815C981818C89C003EFCD7 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		3C89FC421818BCC400E954C2 /* HW2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HW2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C89FC451818BCC400E954C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C89FC471818BCC400E954C2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +66,11 @@
 		3C89FC6C1818BCC400E954C2 /* HW2Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HW2Tests-Info.plist"; sourceTree = "<group>"; };
 		3C89FC6E1818BCC400E954C2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3C89FC701818BCC400E954C2 /* HW2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HW2Tests.m; sourceTree = "<group>"; };
+		3C89FC801818C16700E954C2 /* HW2PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HW2PostTableViewCell.h; sourceTree = "<group>"; };
+		3C89FC811818C16700E954C2 /* HW2PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW2PostTableViewCell.m; sourceTree = "<group>"; };
+		3C89FC831818C1CE00E954C2 /* HW2PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HW2PostTableViewController.h; sourceTree = "<group>"; };
+		3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW2PostTableViewController.m; sourceTree = "<group>"; };
+		3C89FC871818C31E00E954C2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +130,21 @@
 		3C89FC4B1818BCC400E954C2 /* HW2 */ = {
 			isa = PBXGroup;
 			children = (
+				3C89FC801818C16700E954C2 /* HW2PostTableViewCell.h */,
+				3C89FC811818C16700E954C2 /* HW2PostTableViewCell.m */,
+				3C89FC831818C1CE00E954C2 /* HW2PostTableViewController.h */,
+				3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */,
 				3C89FC541818BCC400E954C2 /* HW2AppDelegate.h */,
 				3C89FC551818BCC400E954C2 /* HW2AppDelegate.m */,
 				3C89FC571818BCC400E954C2 /* Main.storyboard */,
+				3C380F9E1819DA15003E5FB6 /* HW2PostFormViewController.h */,
+				3C380F9F1819DA15003E5FB6 /* HW2PostFormViewController.m */,
+				3C380FA11819F83A003E5FB6 /* HW2PostModel.h */,
+				3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */,
+				3C815C971818C89C003EFCD7 /* User.h */,
+				3C815C981818C89C003EFCD7 /* User.m */,
+				3C815C941818C89B003EFCD7 /* Post.h */,
+				3C815C951818C89B003EFCD7 /* Post.m */,
 				3C89FC5A1818BCC400E954C2 /* HW2ViewController.h */,
 				3C89FC5B1818BCC400E954C2 /* HW2ViewController.m */,
 				3C89FC5D1818BCC400E954C2 /* Images.xcassets */,
@@ -250,9 +280,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C815C991818C89C003EFCD7 /* User.m in Sources */,
 				3C89FC5C1818BCC400E954C2 /* HW2ViewController.m in Sources */,
 				3C89FC561818BCC400E954C2 /* HW2AppDelegate.m in Sources */,
+				3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */,
+				3C89FC821818C16700E954C2 /* HW2PostTableViewCell.m in Sources */,
+				3C380FA01819DA15003E5FB6 /* HW2PostFormViewController.m in Sources */,
 				3C89FC521818BCC400E954C2 /* main.m in Sources */,
+				3C89FC851818C1CE00E954C2 /* HW2PostTableViewController.m in Sources */,
+				3C815C961818C89B003EFCD7 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +497,7 @@
 				3C89FC761818BCC400E954C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C89FC771818BCC400E954C2 /* Build configuration list for PBXNativeTarget "HW2Tests" */ = {
 			isa = XCConfigurationList;
@@ -469,8 +506,22 @@
 				3C89FC791818BCC400E954C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3C89FC871818C31E00E954C2 /* Model.xcdatamodel */,
+			);
+			currentVersion = 3C89FC871818C31E00E954C2 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3C89FC3A1818BCC400E954C2 /* Project object */;
 }
