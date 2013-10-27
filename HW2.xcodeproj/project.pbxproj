@@ -28,6 +28,7 @@
 		3C89FC821818C16700E954C2 /* HW2PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC811818C16700E954C2 /* HW2PostTableViewCell.m */; };
 		3C89FC851818C1CE00E954C2 /* HW2PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */; };
 		3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */; };
+		3C8AABBB181CC63900C25F63 /* UIColor+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HW2PostTableViewController.m; sourceTree = "<group>"; };
 		3C89FC871818C31E00E954C2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3C8AABB5181CC21000C25F63 /* HW2PostUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HW2PostUpdateDelegate.h; sourceTree = "<group>"; };
+		3C8AABB9181CC63900C25F63 /* UIColor+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extra.h"; path = "../UIColor+Extra.h"; sourceTree = "<group>"; };
+		3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extra.m"; path = "../UIColor+Extra.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 				3C815C981818C89C003EFCD7 /* User.m */,
 				3C815C941818C89B003EFCD7 /* Post.h */,
 				3C815C951818C89B003EFCD7 /* Post.m */,
+				3C8AABB9181CC63900C25F63 /* UIColor+Extra.h */,
+				3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */,
 				3C89FC571818BCC400E954C2 /* Main.storyboard */,
 				3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */,
 				3C89FC5A1818BCC400E954C2 /* HW2ViewController.h */,
@@ -291,6 +296,7 @@
 				3C89FC5C1818BCC400E954C2 /* HW2ViewController.m in Sources */,
 				3C89FC561818BCC400E954C2 /* HW2AppDelegate.m in Sources */,
 				3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */,
+				3C8AABBB181CC63900C25F63 /* UIColor+Extra.m in Sources */,
 				3C89FC821818C16700E954C2 /* HW2PostTableViewCell.m in Sources */,
 				3C380FA01819DA15003E5FB6 /* HW2PostFormViewController.m in Sources */,
 				3C89FC521818BCC400E954C2 /* main.m in Sources */,

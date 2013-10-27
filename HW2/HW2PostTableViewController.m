@@ -10,6 +10,7 @@
 #import "HW2PostTableViewController.h"
 #import "HW2PostFormViewController.h"
 #import "HW2CoreDataPostModel.h"
+#import "UIColor+Extra.h"
 #import "Post.h"
 #import "User.h"
 
@@ -20,6 +21,33 @@
 @end
 
 @implementation HW2PostTableViewController
+
+- (id)init
+{
+    id v = [super init];
+    [self setup];
+    return v;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    id v = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self setup];
+    return v;
+}
+
+- (void)setup
+{
+    NSLog(@"Initing post background colors");
+    _postBackgroundColors = [[NSMutableDictionary alloc] init];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    id v = [super initWithCoder:aDecoder];
+    [self setup];
+    return v;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -91,6 +119,19 @@
     
     Post *post = _posts[indexPath.row];
     [cell setPost:post];
+    
+    if (nil == [_postBackgroundColors objectForKey:post.title]) {
+        NSLog(@"Object for key NOT found");
+        UIColor *randomColor = [UIColor random];
+        cell.backgroundColor = randomColor;
+        [_postBackgroundColors setObject:randomColor forKey:post.title];
+        if (nil != [_postBackgroundColors objectForKey:post.title]) {
+            NSLog(@"Found the thing I just put in there");
+        }
+    } else {
+        NSLog(@"Object for key found");
+        cell.backgroundColor = [_postBackgroundColors objectForKey:post.title];
+    }
     return cell;
 }
 

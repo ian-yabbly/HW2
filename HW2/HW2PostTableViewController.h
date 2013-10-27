@@ -19,5 +19,6 @@
 
 @property (nonatomic) User *author;
 @property (nonatomic) NSArray *posts;
+@property (nonatomic) NSMutableDictionary *postBackgroundColors;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "HW2PostTableViewCell.h"
+#import "UIColor+Extra.h"
 
 @implementation HW2PostTableViewCell
 
