@@ -7,6 +7,7 @@
 //
 
 #import "HW2PostFormViewController.h"
+#import "HW2CoreDataPostModel.h"
 
 @interface HW2PostFormViewController ()
 
@@ -26,7 +27,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    if (_post) {
+        _fieldTitle.text = _post.title;
+        _fieldBody.text = _post.body;
+        [self setTitle:@"Edit Post"];
+    } else {
+        _fieldTitle.text = nil;
+        _fieldBody.text = nil;
+        [self setTitle:@"New Post"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,13 +45,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelTapped:(id)sender
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)saveTapped:(id)sender
 {
-    [_postModel addPostWithAuthor:_author title:_fieldTitle.text body:_fieldBody.text];
+    if (_post) {
+        _post.title = _fieldTitle.text;
+        _post.body = _fieldBody.text;
+        [[HW2CoreDataPostModel singletonInstance] updatePost:_post];
+        [_postUpdateDelegate postWasCreated:_post];
+    } else {
+        Post *createdPost = [[HW2CoreDataPostModel singletonInstance] createPostWithAuthor:_author
+                                                              andTitle:_fieldTitle.text
+                                                               andBody:_fieldBody.text];
+        [_postUpdateDelegate postWasCreated:createdPost];
+    }
+    
+    [[self navigationController] popViewControllerAnimated:YES];
 }
+
 @end

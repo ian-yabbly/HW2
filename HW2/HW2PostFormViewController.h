@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "HW2PostTableViewController.h"
+#import "HW2PostUpdateDelegate.h"
+#import "Post.h"
+#import "User.h"
 
 @interface HW2PostFormViewController : UIViewController
 
@@ -18,9 +20,9 @@
 
 @property (nonatomic) User *author;
 
-@property (nonatomic) HW2PostTableViewController *postModel;
+@property (nonatomic) Post *post;
 
-- (IBAction)cancelTapped:(id)sender;
+@property (nonatomic) id<HW2PostUpdateDelegate> postUpdateDelegate;
 
 - (IBAction)saveTapped:(id)sender;
 

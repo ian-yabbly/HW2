@@ -23,6 +23,8 @@
 
 @interface User (CoreDataGeneratedAccessors)
 
+//+ (User *)initWithEmail:(NSString *)email andFirstName:(NSString *)firstName andLastName:(NSString *)lastName andUsername:(NSString *)username;
+
 - (void)insertObject:(Post *)value inPostAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromPostAtIndex:(NSUInteger)idx;
 - (void)insertPost:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
@@ -33,4 +35,5 @@
 - (void)removePostObject:(Post *)value;
 - (void)addPost:(NSOrderedSet *)values;
 - (void)removePost:(NSOrderedSet *)values;
+
 @end

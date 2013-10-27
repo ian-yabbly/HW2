@@ -17,4 +17,18 @@
 @dynamic title;
 @dynamic author;
 
+/*
++ (Post *)initWithAuthor:(User *)author andBody:(NSString *)body andTitle:(NSString *)title
+{
+    Post *post = [[Post alloc] init];
+    
+    post.author = author;
+    post.body = body;
+    post.title = title;
+    post.creationDate = [[NSDate alloc] init];
+    
+    return post;
+}
+*/
+
 @end

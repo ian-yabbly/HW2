@@ -19,4 +19,19 @@
 @dynamic username;
 @dynamic post;
 
+/*
++ (User *)initWithEmail:(NSString *)email andFirstName:(NSString *)firstName andLastName:(NSString *)lastName andUsername:(NSString *)username
+{
+    User *user = [[User alloc] init];
+    
+    user.email = email;
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.username = username;
+    user.creationDate = [[NSDate alloc] init];
+    
+    return user;
+}
+*/
+
 @end

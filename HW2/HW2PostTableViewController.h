@@ -11,12 +11,12 @@
 #import <CoreData/CoreData.h>
 
 #import "User.h"
-#import "HW2PostModel.h"
+#import "HW2PostUpdateDelegate.h"
 
-@interface HW2PostTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, HW2PostModel>
+@interface HW2PostTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, HW2PostUpdateDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (nonatomic) User *author;
 @property (nonatomic) NSArray *posts;
 

@@ -8,6 +8,7 @@
 
 #import "HW2AppDelegate.h"
 #import "HW2PostTableViewController.h"
+#import "HW2CoreDataPostModel.h"
 
 @implementation HW2AppDelegate
 
@@ -18,9 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    HW2PostTableViewController *controller = (HW2PostTableViewController *)[navigationController topViewController];
-    controller.managedObjectContext = self.managedObjectContext;
+    //UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    //HW2PostTableViewController *controller = (HW2PostTableViewController *)[navigationController topViewController];
+    //controller.managedObjectContext = self.managedObjectContext;
+    
+    // Setup the PostModle
+    [HW2CoreDataPostModel singletonInstance].managedObjectContext = self.managedObjectContext;
     
     return YES;
 }

@@ -9,6 +9,7 @@
 #import "HW2PostTableViewCell.h"
 #import "HW2PostTableViewController.h"
 #import "HW2PostFormViewController.h"
+#import "HW2CoreDataPostModel.h"
 #import "Post.h"
 #import "User.h"
 
@@ -35,52 +36,25 @@
     
     // First look for a User with username of DEFAULT_USERNAME. If this does not exist
     // create it. This will be the default User.
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"User" inManagedObjectContext:_managedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(username = '%@')", DEFAULT_USERNAME];
-    [request setPredicate: predicate];
-    
-    NSError *error;
-    NSArray *userArray = [_managedObjectContext executeFetchRequest:request error:&error];
-
-    if (nil != userArray) {
-        NSUInteger count = [userArray count];
-        if (1 == count) {
-            _author = userArray[0];
-        } else if (0 == count) {
-            // Create the default user
-            User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
-            user.username = DEFAULT_USERNAME;
-            user.firstName = @"Ian";
-            user.lastName = @"Shafer";
-            user.creationDate = [[NSDate alloc] init];
-            if (![_managedObjectContext save:&error]) {
-                NSLog(@"Could not save new user [%@]", DEFAULT_USERNAME);
-            }
-            _author = user;
-        } else {
-            NSLog(@"Unexpected numer of results for User with username [%@]", DEFAULT_USERNAME);
-        }
-    } else {
-        // Not sure how to handle error
-        NSLog(@"We had a problem getting the user %@", DEFAULT_USERNAME);
+    _author = [[HW2CoreDataPostModel singletonInstance] findUserByUsername:DEFAULT_USERNAME];
+    if (nil == _author) {
+        _author = [[HW2CoreDataPostModel singletonInstance] createUserWithEmail:@"ian@yabbly.com"
+                                                                   andFirstName:@"Ian"
+                                                                    andLastName:@"Shafer"
+                                                                    andUsername:DEFAULT_USERNAME];
     }
     
     // Now retreive all the Posts
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    _posts = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"Found [%d] posts", [_posts count]);
+    _posts = [self findAllPosts];
     
     if (_posts.count == 0) {
         while (_posts.count < 10) {
-            NSLog(@"Creating post");
-            [self addPostWithAuthor:_author title:[NSString stringWithFormat:@"Title of post #%d", _posts.count] body:[NSString stringWithFormat:@"Body of post #%d", _posts.count]];
+            [[HW2CoreDataPostModel singletonInstance] createPostWithAuthor:_author
+                                                                  andTitle:[NSString stringWithFormat:@"Title of post #%d", _posts.count]
+                                                                   andBody:[NSString stringWithFormat:@"Body of post #%d", _posts.count]];
+            
+            _posts = [self findAllPosts];
         }
     }
 
@@ -115,10 +89,8 @@
     
     HW2PostTableViewCell *cell = (HW2PostTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSLog(@"Cell [%@]", cell);
     Post *post = _posts[indexPath.row];
     [cell setPost:post];
-    //cell.textLabel.text = post.title;
     return cell;
 }
 
@@ -161,54 +133,51 @@
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(HW2PostTableViewCell *)sender
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     HW2PostFormViewController *dest = (HW2PostFormViewController *) [segue destinationViewController];
-    //dest.postModel = self;
-    //dest.author = _author;
+    if ([segue.identifier isEqualToString:@"NewPostSegue"]) {
+        [dest setPost:nil];
+        [dest setAuthor:_author];
+        [dest setPostUpdateDelegate:self];
+    } else if ([segue.identifier isEqualToString:@"EditPostSegue"]) {
+        [dest setPost:sender.post];
+        [dest setAuthor:_author];
+        [dest setPostUpdateDelegate:self];
+    } else {
+        NSLog(@"Unexpected segue [%@]", segue.identifier);
+    }
 }
 
 #pragma mark - Model
 
-- (void)findAllPosts
+- (NSArray *)findAllPosts
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSError *error;
-    _posts = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"Found [%d] posts", [_posts count]);
-}
-
-- (void)addPostWithAuthor:(User *)author title:(NSString *)title body:(NSString *)body
-{
-    Post *post = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:_managedObjectContext];
-    post.author = author;
-    post.title = title;
-    post.body = body;
-    post.creationDate = [[NSDate alloc] init];
-    
-    NSError *error;
-    if (![_managedObjectContext save:&error]) {
-        NSLog(@"Could not save new post: %@", error.description);
-    }
-    
-    [self findAllPosts];
+    return [[HW2CoreDataPostModel singletonInstance] findAllPosts];
 }
 
 - (void)deletePostAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_managedObjectContext deleteObject:_posts[indexPath.row]];
+    [[HW2CoreDataPostModel singletonInstance] deletePost:_posts[indexPath.row]];
 
-    NSError *error;
-    if (![_managedObjectContext save:&error]) {
-        NSLog(@"Could not delete post: %@", error.description);
-    }
+    // TODO There should be a better way to do this
+    _posts = [self findAllPosts];
+}
 
-    [self findAllPosts];
+- (void)postWasCreated:(Post *)post
+{
+    // TODO there may be a better way
+    _posts = [self findAllPosts];
+    [[self tableView] reloadData];
+}
+
+- (void)postWasUpdated:(Post *)post
+{
+    // TODO there may be a better way
+    _posts = [self findAllPosts];
+    [[self tableView] reloadData];
 }
 
 @end

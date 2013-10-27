@@ -8,10 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-#import "User.h"
+#import "Post.h"
 
 @protocol HW2PostModel <NSObject>
 
-- (void)addPostWithAuthor:(User *)author title:(NSString *)title body:(NSString *)body;
+- (User *)createUserWithEmail:(NSString *)email
+                 andFirstName:(NSString *)firstName
+                  andLastName:(NSString *)lastName
+                  andUsername:(NSString *)username;
+
+- (User *)findUserByUsername:(NSString *)username;
+- (NSArray *)findAllUsers;
+- (Post *)createPostWithAuthor:(User *)author andTitle:(NSString *)title andBody:(NSString *)body;
+- (void)deletePost:(Post *)post;
+- (void)updatePost:(Post *)post;
+- (NSArray *)findAllPosts;
+- (NSArray *)findAllPostsWithOffset:(NSInteger *)offset andLimit:(NSInteger *)limit;
 
 @end

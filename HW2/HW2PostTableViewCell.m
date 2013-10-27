@@ -33,7 +33,6 @@
     [dateFormatter setDateFormat:@"MMM d, yyyy"];
     _post = post;
     self.textLabel.text = post.title;
-    NSLog(@"detailTextLabel [%@]", self.detailTextLabel);
     self.detailTextLabel.text = [dateFormatter stringFromDate:post.creationDate];
 }
 

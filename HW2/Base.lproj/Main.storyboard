@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Post Table View Controller-->
+        <!--Post Table View Controller - Posts-->
         <scene sceneID="7SE-i2-lcb">
             <objects>
                 <tableViewController id="eL5-Vt-IVI" customClass="HW2PostTableViewController" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="ss3-xg-GgT" kind="modal" id="ovD-7X-D71"/>
+                                    <segue destination="wuM-PE-eQe" kind="push" identifier="EditPostSegue" id="sK8-Y8-GR4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -46,10 +46,10 @@
                             <outlet property="delegate" destination="eL5-Vt-IVI" id="F6r-AZ-tRF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="tYB-Je-agU">
+                    <navigationItem key="navigationItem" title="Posts" id="tYB-Je-agU">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="3X3-Jw-tQL">
                             <connections>
-                                <segue destination="ss3-xg-GgT" kind="modal" id="yWF-w3-aeA"/>
+                                <segue destination="wuM-PE-eQe" kind="push" identifier="NewPostSegue" id="M5U-bm-G2w"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -88,11 +88,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="oqD-yI-PwL">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="jKZ-uZ-7X2">
-                            <connections>
-                                <action selector="cancelTapped:" destination="wuM-PE-eQe" id="mmC-BN-ym8"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="56w-3U-bcE">
                             <connections>
                                 <action selector="saveTapped:" destination="wuM-PE-eQe" id="iJM-bb-BUu"/>
@@ -106,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEw-ft-Ip4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1095" y="142"/>
+            <point key="canvasLocation" x="553" y="144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZEA-Hh-7d0">
@@ -126,24 +121,6 @@
             </objects>
             <point key="canvasLocation" x="-460" y="144"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="oyJ-vU-XeT">
-            <objects>
-                <navigationController storyboardIdentifier="Post Form Navigation Controller" automaticallyAdjustsScrollViewInsets="NO" id="ss3-xg-GgT" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mjX-xR-WWw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="wuM-PE-eQe" kind="relationship" relationship="rootViewController" id="1ce-7p-b9B"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kGl-AY-jCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="569" y="142"/>
-        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -151,6 +128,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yWF-w3-aeA"/>
+        <segue reference="sK8-Y8-GR4"/>
     </inferredMetricsTieBreakers>
 </document>

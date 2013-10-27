@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "User.h"
+#import "Post.h"
 
 @class User;
 
@@ -17,5 +19,7 @@
 @property (nonatomic, retain) NSDate * creationDate;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) User *author;
+
+//+ (Post *)initWithAuthor:(User *)author andBody:(NSString *)body andTitle:(NSString *)title;
 
 @end
