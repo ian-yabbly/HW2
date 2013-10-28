@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 
 #import "HW2CoreDataPostModel.h"
+#import "User.h"
 
 @implementation HW2CoreDataPostModel
 
@@ -61,16 +62,40 @@
         NSLog(@"User array by username [%@] is nil", username);
         return nil;
     } else {
-        if (foundUsers.count == 1)
-        {
+        if (foundUsers.count == 1) {
             return foundUsers[0];
-        }
-        else if (foundUsers.count == 0)
-        {
+        } else if (foundUsers.count == 0) {
+            return nil;
+        } else {
+            // TODO
             return nil;
         }
-        else
-        {
+    }
+}
+
+- (User *)findUserById:(long)userId
+{
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"id = %ld", userId];
+    [request setPredicate: predicate];
+    
+    // TODO Can I create a unique constraint on the core data users table?
+    NSError *error;
+    NSArray *foundUsers = [_managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (nil == foundUsers) {
+        NSLog(@"User array by ID [%ld] is nil", userId);
+        return nil;
+    } else {
+        if (foundUsers.count == 1) {
+            return foundUsers[0];
+        } else if (foundUsers.count == 0) {
+            return nil;
+        } else {
             // TODO
             return nil;
         }
@@ -87,13 +112,18 @@
     return [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
 
-- (Post *)createPostWithAuthor:(User *)author andTitle:(NSString *)title andBody:(NSString *)body;
+- (Post *)createPostWithId:(long)postId
+                 andAuthor:(User *)author
+                  andTitle:(NSString *)title
+                   andBody:(NSString *)body
+           andCreationDate:(NSDate *)creationDate
 {
     Post *managedPost = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:_managedObjectContext];
+    managedPost.id = [[NSNumber alloc] initWithLong:postId];
     managedPost.author = author;
     managedPost.title = title;
     managedPost.body = body;
-    managedPost.creationDate = [[NSDate alloc] init];
+    managedPost.creationDate = creationDate;
     
     NSError *error;
     if (![_managedObjectContext save:&error]) {
@@ -121,11 +151,43 @@
     }
 }
 
+- (Post *)findPostById:(long)postId
+{
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"Post" inManagedObjectContext:_managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"id = %ld", postId];
+    [request setPredicate: predicate];
+    
+    // TODO Can I create a unique constraint on the core data users table?
+    NSError *error;
+    NSArray *foundPosts = [_managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (nil == foundPosts) {
+        NSLog(@"Post array by ID [%ld] is nil", postId);
+        return nil;
+    } else {
+        if (foundPosts.count == 1) {
+            return foundPosts[0];
+        } else if (foundPosts.count == 0) {
+            return nil;
+        } else {
+            // TODO
+            NSLog(@"Found multiple [%d] posts for ID [%ld]", foundPosts.count, postId);
+            return nil;
+        }
+    }
+}
+
 - (NSArray *)findAllPosts
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:_managedObjectContext];
     [fetchRequest setEntity:entity];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+    [fetchRequest setSortDescriptors:@[sort]];
     
     NSError *error;
     return [_managedObjectContext executeFetchRequest:fetchRequest error:&error];

@@ -2,7 +2,7 @@
 //  User.h
 //  HW2
 //
-//  Created by Ian Shafer on 10/23/13.
+//  Created by Ian Shafer on 10/28/13.
 //  Copyright (c) 2013 Yabbly. All rights reserved.
 //
 
@@ -18,12 +18,11 @@
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * username;
+@property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSOrderedSet *post;
 @end
 
 @interface User (CoreDataGeneratedAccessors)
-
-//+ (User *)initWithEmail:(NSString *)email andFirstName:(NSString *)firstName andLastName:(NSString *)lastName andUsername:(NSString *)username;
 
 - (void)insertObject:(Post *)value inPostAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromPostAtIndex:(NSUInteger)idx;
@@ -35,5 +34,4 @@
 - (void)removePostObject:(Post *)value;
 - (void)addPost:(NSOrderedSet *)values;
 - (void)removePost:(NSOrderedSet *)values;
-
 @end

@@ -38,7 +38,6 @@
 
 - (void)setup
 {
-    NSLog(@"Initing post background colors");
     _postBackgroundColors = [[NSMutableDictionary alloc] init];
 }
 
@@ -64,7 +63,7 @@
     
     // First look for a User with username of DEFAULT_USERNAME. If this does not exist
     // create it. This will be the default User.
-    
+/*
     _author = [[HW2CoreDataPostModel singletonInstance] findUserByUsername:DEFAULT_USERNAME];
     if (nil == _author) {
         _author = [[HW2CoreDataPostModel singletonInstance] createUserWithEmail:@"ian@yabbly.com"
@@ -72,10 +71,10 @@
                                                                     andLastName:@"Shafer"
                                                                     andUsername:DEFAULT_USERNAME];
     }
-    
+*/
     // Now retreive all the Posts
     _posts = [self findAllPosts];
-    
+/*
     if (_posts.count == 0) {
         while (_posts.count < 10) {
             [[HW2CoreDataPostModel singletonInstance] createPostWithAuthor:_author
@@ -85,7 +84,7 @@
             _posts = [self findAllPosts];
         }
     }
-
+*/
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -121,15 +120,10 @@
     [cell setPost:post];
     
     if (nil == [_postBackgroundColors objectForKey:post.title]) {
-        NSLog(@"Object for key NOT found");
         UIColor *randomColor = [UIColor random];
         cell.backgroundColor = randomColor;
         [_postBackgroundColors setObject:randomColor forKey:post.title];
-        if (nil != [_postBackgroundColors objectForKey:post.title]) {
-            NSLog(@"Found the thing I just put in there");
-        }
     } else {
-        NSLog(@"Object for key found");
         cell.backgroundColor = [_postBackgroundColors objectForKey:post.title];
     }
     return cell;

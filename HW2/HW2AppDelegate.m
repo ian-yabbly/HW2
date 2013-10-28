@@ -9,6 +9,7 @@
 #import "HW2AppDelegate.h"
 #import "HW2PostTableViewController.h"
 #import "HW2CoreDataPostModel.h"
+#import "HW2RestClient.h"
 
 @implementation HW2AppDelegate
 
@@ -18,13 +19,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    //UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    //HW2PostTableViewController *controller = (HW2PostTableViewController *)[navigationController topViewController];
-    //controller.managedObjectContext = self.managedObjectContext;
-    
+    // TODO Is this where I should do this?
     // Setup the PostModle
     [HW2CoreDataPostModel singletonInstance].managedObjectContext = self.managedObjectContext;
+    
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    HW2PostTableViewController *postTableViewController = (HW2PostTableViewController *)[navigationController topViewController];
+
+    [[HW2RestClient singletonInstance] setPostUpdateDelegate:postTableViewController];
+    [[HW2RestClient singletonInstance] createSessionForUserWithId:1l onSuccess:^void (NSString *sessionId) {
+        [[HW2RestClient singletonInstance] findAllPostsWithOffset:0 andLimit:10 onSuccess:nil];
+    }];
+    
     
     return YES;
 }

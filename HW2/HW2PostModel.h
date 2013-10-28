@@ -18,10 +18,18 @@
                   andUsername:(NSString *)username;
 
 - (User *)findUserByUsername:(NSString *)username;
+- (User *)findUserById:(long)userId;
 - (NSArray *)findAllUsers;
-- (Post *)createPostWithAuthor:(User *)author andTitle:(NSString *)title andBody:(NSString *)body;
+
+- (Post *)createPostWithId:(long)postId
+                 andAuthor:(User *)author
+                  andTitle:(NSString *)title
+                   andBody:(NSString *)body
+           andCreationDate:(NSDate *)creationDate;
+
 - (void)deletePost:(Post *)post;
 - (void)updatePost:(Post *)post;
+- (Post *)findPostById:(long)postId;
 - (NSArray *)findAllPosts;
 - (NSArray *)findAllPostsWithOffset:(NSInteger *)offset andLimit:(NSInteger *)limit;
 
