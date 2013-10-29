@@ -31,7 +31,7 @@
 - (void)setPost:(Post *)post
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM d, yyyy"];
+    [dateFormatter setDateFormat:@"MMM d, yyyy HH:mm"];
     _post = post;
     self.textLabel.text = post.title;
     self.detailTextLabel.text = [dateFormatter stringFromDate:post.creationDate];

@@ -119,12 +119,12 @@
     Post *post = _posts[indexPath.row];
     [cell setPost:post];
     
-    if (nil == [_postBackgroundColors objectForKey:post.title]) {
+    if (nil == [_postBackgroundColors objectForKey:post.id]) {
         UIColor *randomColor = [UIColor random];
         cell.backgroundColor = randomColor;
-        [_postBackgroundColors setObject:randomColor forKey:post.title];
+        [_postBackgroundColors setObject:randomColor forKey:post.id];
     } else {
-        cell.backgroundColor = [_postBackgroundColors objectForKey:post.title];
+        cell.backgroundColor = [_postBackgroundColors objectForKey:post.id];
     }
     return cell;
 }
@@ -183,6 +183,13 @@
         [dest setPostUpdateDelegate:self];
     } else {
         NSLog(@"Unexpected segue [%@]", segue.identifier);
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y == scrollView.contentSize.height - scrollView.frame.size.height) {
+        NSLog(@"Reached the end");
     }
 }
 
