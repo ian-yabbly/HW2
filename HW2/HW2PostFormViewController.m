@@ -7,8 +7,7 @@
 //
 
 #import "HW2PostFormViewController.h"
-#import "HW2RestClient.h"
-#import "HW2CoreDataPostModel.h"
+#import "HW2ModelCoordinator.h"
 
 @interface HW2PostFormViewController ()
 
@@ -51,15 +50,11 @@
     if (_post) {
         _post.title = _fieldTitle.text;
         _post.body = _fieldBody.text;
-        [[HW2RestClient singletonInstance] updatePost:_post onSuccess:^(Post *updatedPost) {
-            [_postUpdateDelegate postWasUpdated:updatedPost];
-        }];
+        [[HW2ModelCoordinator singletonInstance] updatePost:_post];
     } else {
-        [[HW2RestClient singletonInstance] createPostWithTitle:_fieldTitle.text
-                                                        andBody:_fieldBody.text
-                                                     onSuccess:^(Post *createdPost) {
-                                                         [_postUpdateDelegate postWasCreated:createdPost];
-                                                     }];
+        [[HW2ModelCoordinator singletonInstance] createPostWithTitle:_fieldTitle.text
+                                                             andBody:_fieldBody.text
+                                                           onSuccess:nil];
     }
     
     [[self navigationController] popViewControllerAnimated:YES];

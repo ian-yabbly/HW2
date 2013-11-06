@@ -15,4 +15,6 @@
 
 + (HW2CoreDataPostModel *)singletonInstance;
 
+- (NSFetchedResultsController *)findAllPostsInFetchedResultsController;
+
 @end

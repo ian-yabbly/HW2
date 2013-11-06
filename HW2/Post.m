@@ -2,7 +2,7 @@
 //  Post.m
 //  HW2
 //
-//  Created by Ian Shafer on 10/28/13.
+//  Created by Ian Shafer on 11/5/13.
 //  Copyright (c) 2013 Yabbly. All rights reserved.
 //
 
@@ -14,8 +14,9 @@
 
 @dynamic body;
 @dynamic creationDate;
+@dynamic imageId;
+@dynamic postId;
 @dynamic title;
-@dynamic id;
-@dynamic author;
+@dynamic user;
 
 @end

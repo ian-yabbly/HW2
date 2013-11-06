@@ -23,35 +23,37 @@
     return sharedInstance;
 }
 
-- (User *)createUserWithEmail:(NSString *)email
+- (User *)createUserWithId:(NSNumber *)userId
+                     andEmail:(NSString *)email
                  andFirstName:(NSString *)firstName
                   andLastName:(NSString *)lastName
-                  andUsername:(NSString *)username;
+                  andName:(NSString *)name;
 {
     User *managedUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
     
+    managedUser.userId = userId;
     managedUser.email = email;
-    managedUser.username = username;
+    managedUser.name = name;
     managedUser.firstName = firstName;
     managedUser.lastName = lastName;
     managedUser.creationDate = [[NSDate alloc] init];
     
     NSError *error;
     if (![_managedObjectContext save:&error]) {
-        NSLog(@"Could not save new user [%@]", username);
+        NSLog(@"Could not save new user [%@]", name);
     }
     
     return managedUser;
 }
 
-- (User *)findUserByUsername:(NSString *)username
+- (User *)findUserByName:(NSString *)name
 {
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"User" inManagedObjectContext:_managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"User"
+                                                         inManagedObjectContext:_managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"username = %@", username];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"name = %@", name];
     [request setPredicate: predicate];
     
     // TODO Can I create a unique constraint on the core data users table?
@@ -59,7 +61,7 @@
     NSArray *foundUsers = [_managedObjectContext executeFetchRequest:request error:&error];
     
     if (nil == foundUsers) {
-        NSLog(@"User array by username [%@] is nil", username);
+        NSLog(@"User array by name [%@] is nil", name);
         return nil;
     } else {
         if (foundUsers.count == 1) {
@@ -80,7 +82,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"id = %ld", userId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"userId = %ld", userId];
     [request setPredicate: predicate];
     
     // TODO Can I create a unique constraint on the core data users table?
@@ -112,15 +114,17 @@
     return [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
 }
 
-- (Post *)createPostWithId:(long)postId
-                 andAuthor:(User *)author
+- (Post *)createPostWithId:(NSNumber *)postId
+                 andUser:(User *)user
                   andTitle:(NSString *)title
                    andBody:(NSString *)body
            andCreationDate:(NSDate *)creationDate
 {
-    Post *managedPost = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:_managedObjectContext];
-    managedPost.id = [[NSNumber alloc] initWithLong:postId];
-    managedPost.author = author;
+    Post *managedPost = [NSEntityDescription insertNewObjectForEntityForName:@"Post"
+                                                      inManagedObjectContext:_managedObjectContext];
+    
+    managedPost.postId = postId;
+    managedPost.user = user;
     managedPost.title = title;
     managedPost.body = body;
     managedPost.creationDate = creationDate;
@@ -158,7 +162,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"id = %ld", postId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"postId = %ld", postId];
     [request setPredicate: predicate];
     
     // TODO Can I create a unique constraint on the core data users table?
@@ -191,6 +195,25 @@
     
     NSError *error;
     return [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+}
+
+- (NSFetchedResultsController *)findAllPostsInFetchedResultsController
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Post" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]]];
+    [fetchRequest setFetchBatchSize:20];
+
+    NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:_managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
+    NSError *error;
+    BOOL isSuccess = [controller performFetch:&error];
+    if (!isSuccess) {
+        [NSException raise:@"Error peforming post fetch" format:@"%@", error.description];
+    }
+    
+    return controller;
 }
 
 - (NSArray *)findAllPostsWithOffset:(NSInteger *)offset andLimit:(NSInteger *)limit

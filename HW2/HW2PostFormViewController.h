@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "HW2PostUpdateDelegate.h"
 #import "Post.h"
 #import "User.h"
 
@@ -21,8 +20,6 @@
 @property (nonatomic) User *author;
 
 @property (nonatomic) Post *post;
-
-@property (nonatomic) id<HW2PostUpdateDelegate> postUpdateDelegate;
 
 - (IBAction)saveTapped:(id)sender;
 

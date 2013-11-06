@@ -9,7 +9,7 @@
 #import "HW2PostTableViewCell.h"
 #import "HW2PostTableViewController.h"
 #import "HW2PostFormViewController.h"
-#import "HW2CoreDataPostModel.h"
+#import "HW2ModelCoordinator.h"
 #import "UIColor+Extra.h"
 #import "Post.h"
 #import "User.h"
@@ -38,7 +38,6 @@
 
 - (void)setup
 {
-    _postBackgroundColors = [[NSMutableDictionary alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -61,30 +60,6 @@
 {
     [super viewDidLoad];
     
-    // First look for a User with username of DEFAULT_USERNAME. If this does not exist
-    // create it. This will be the default User.
-/*
-    _author = [[HW2CoreDataPostModel singletonInstance] findUserByUsername:DEFAULT_USERNAME];
-    if (nil == _author) {
-        _author = [[HW2CoreDataPostModel singletonInstance] createUserWithEmail:@"ian@yabbly.com"
-                                                                   andFirstName:@"Ian"
-                                                                    andLastName:@"Shafer"
-                                                                    andUsername:DEFAULT_USERNAME];
-    }
-*/
-    // Now retreive all the Posts
-    _posts = [self findAllPosts];
-/*
-    if (_posts.count == 0) {
-        while (_posts.count < 10) {
-            [[HW2CoreDataPostModel singletonInstance] createPostWithAuthor:_author
-                                                                  andTitle:[NSString stringWithFormat:@"Title of post #%d", _posts.count]
-                                                                   andBody:[NSString stringWithFormat:@"Body of post #%d", _posts.count]];
-            
-            _posts = [self findAllPosts];
-        }
-    }
-*/
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -102,12 +77,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    NSInteger sectionCount = [[_fetchedResultsController sections] count];
+    return sectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _posts.count;
+    id  sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,16 +93,9 @@
     
     HW2PostTableViewCell *cell = (HW2PostTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    Post *post = _posts[indexPath.row];
+    Post *post = [_fetchedResultsController objectAtIndexPath:indexPath];
     [cell setPost:post];
     
-    if (nil == [_postBackgroundColors objectForKey:post.id]) {
-        UIColor *randomColor = [UIColor random];
-        cell.backgroundColor = randomColor;
-        [_postBackgroundColors setObject:randomColor forKey:post.id];
-    } else {
-        cell.backgroundColor = [_postBackgroundColors objectForKey:post.id];
-    }
     return cell;
 }
 
@@ -141,8 +111,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [self deletePostAtIndexPath:indexPath];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [[HW2ModelCoordinator singletonInstance] deletePost:[_fetchedResultsController objectAtIndexPath:indexPath]];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -176,11 +145,9 @@
     if ([segue.identifier isEqualToString:@"NewPostSegue"]) {
         [dest setPost:nil];
         [dest setAuthor:_author];
-        [dest setPostUpdateDelegate:self];
     } else if ([segue.identifier isEqualToString:@"EditPostSegue"]) {
         [dest setPost:sender.post];
         [dest setAuthor:_author];
-        [dest setPostUpdateDelegate:self];
     } else {
         NSLog(@"Unexpected segue [%@]", segue.identifier);
     }
@@ -193,33 +160,9 @@
     }
 }
 
-#pragma mark - Model
-
-- (NSArray *)findAllPosts
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    return [[HW2CoreDataPostModel singletonInstance] findAllPosts];
-}
-
-- (void)deletePostAtIndexPath:(NSIndexPath *)indexPath
-{
-    [[HW2CoreDataPostModel singletonInstance] deletePost:_posts[indexPath.row]];
-
-    // TODO There should be a better way to do this
-    _posts = [self findAllPosts];
-}
-
-- (void)postWasCreated:(Post *)post
-{
-    // TODO there may be a better way
-    _posts = [self findAllPosts];
-    [[self tableView] reloadData];
-}
-
-- (void)postWasUpdated:(Post *)post
-{
-    // TODO there may be a better way
-    _posts = [self findAllPosts];
-    [[self tableView] reloadData];
+    [self.tableView reloadData];
 }
 
 @end

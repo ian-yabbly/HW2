@@ -10,6 +10,7 @@
 #import "HW2PostTableViewController.h"
 #import "HW2CoreDataPostModel.h"
 #import "HW2RestClient.h"
+#import "HW2ModelCoordinator.h"
 
 @implementation HW2AppDelegate
 
@@ -25,12 +26,12 @@
     
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     HW2PostTableViewController *postTableViewController = (HW2PostTableViewController *)[navigationController topViewController];
-
-    [[HW2RestClient singletonInstance] setPostUpdateDelegate:postTableViewController];
-    [[HW2RestClient singletonInstance] createSessionForUserWithId:1l onSuccess:^void (NSString *sessionId) {
-        [[HW2RestClient singletonInstance] findAllPostsWithOffset:0 andLimit:10 onSuccess:nil];
-    }];
     
+    NSFetchedResultsController *fetchedResultsController = [[HW2ModelCoordinator singletonInstance] findAllPostsInFetchedResultsController];
+    
+    fetchedResultsController.delegate = postTableViewController;
+    
+    postTableViewController.fetchedResultsController = fetchedResultsController;
     
     return YES;
 }

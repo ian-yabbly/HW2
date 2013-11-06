@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "HW2PostUpdateDelegate.h"
 #import "User.h"
+#import "Post.h"
 
 @interface HW2RestClient : NSObject
 
@@ -17,21 +17,26 @@
 @property (nonatomic) NSString *baseUrl;
 @property (nonatomic) NSString *sessionId;
 @property (nonatomic) User *currentUser;
-@property (nonatomic) id<HW2PostUpdateDelegate> postUpdateDelegate;
 
 + (HW2RestClient *)singletonInstance;
 
--(void)findAllPostsWithOffset:(int)offset
+- (void)findUserById:(long)userId onSuccess:(void (^)(NSDictionary *json))successHandler;
+
+- (void)findAllPostsWithOffset:(int)offset
                      andLimit:(int)limit
-                    onSuccess:(void (^)(NSArray *posts))successHandler/*
-                                                                                                                    onError:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))errorHandler*/;
+                    onSuccess:(void (^)(NSDictionary *responseDict))successHandler
+                      onError:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))errorHandler;
 
--(void)createSessionForUserWithId:(long) userId onSuccess:(void (^)(NSString *sessionId))successHandler;
+- (void)createSessionForUserWithId:(long)userId onSuccess:(void (^)(NSString *sessionId))successHandler;
 
--(void)createPostWithTitle:(NSString *)title
+- (void)createPostWithTitle:(NSString *)title
                     andBody:(NSString *)body
-                  onSuccess:(void (^)(Post *post))successHandler;
+                  onSuccess:(void (^)(NSDictionary *json))successHandler;
 
--(void)updatePost:(Post *)post onSuccess:(void (^)(Post *updatedPost))successHandler;
+- (void)updatePost:(Post *)post onSuccess:(void (^)(NSDictionary *json))successHandler;
+
+- (void)deletePost:(Post *)post onSuccess:(void (^)(Post *deletedPost))successHandler;
+
+- (void)doWithUser:(void (^)(User *user))fn;
 
 @end
