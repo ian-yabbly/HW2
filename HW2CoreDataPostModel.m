@@ -24,10 +24,11 @@
 }
 
 - (User *)createUserWithId:(NSNumber *)userId
-                     andEmail:(NSString *)email
-                 andFirstName:(NSString *)firstName
-                  andLastName:(NSString *)lastName
-                  andName:(NSString *)name;
+                  andEmail:(NSString *)email
+              andFirstName:(NSString *)firstName
+               andLastName:(NSString *)lastName
+                   andName:(NSString *)name
+                andImageId:(NSString *)imageId
 {
     User *managedUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_managedObjectContext];
     
@@ -37,6 +38,7 @@
     managedUser.firstName = firstName;
     managedUser.lastName = lastName;
     managedUser.creationDate = [[NSDate alloc] init];
+    managedUser.imageId = imageId;
     
     NSError *error;
     if (![_managedObjectContext save:&error]) {
@@ -75,14 +77,14 @@
     }
 }
 
-- (User *)findUserById:(long)userId
+- (User *)findUserById:(NSNumber *)userId
 {
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"User" inManagedObjectContext:_managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"userId = %ld", userId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"userId = %@", userId];
     [request setPredicate: predicate];
     
     // TODO Can I create a unique constraint on the core data users table?
@@ -90,7 +92,7 @@
     NSArray *foundUsers = [_managedObjectContext executeFetchRequest:request error:&error];
     
     if (nil == foundUsers) {
-        NSLog(@"User array by ID [%ld] is nil", userId);
+        NSLog(@"User array by ID [%@] is nil", userId);
         return nil;
     } else {
         if (foundUsers.count == 1) {
@@ -115,9 +117,10 @@
 }
 
 - (Post *)createPostWithId:(NSNumber *)postId
-                 andUser:(User *)user
+                   andUser:(User *)user
                   andTitle:(NSString *)title
                    andBody:(NSString *)body
+                andImageId:(NSString *)imageId
            andCreationDate:(NSDate *)creationDate
 {
     Post *managedPost = [NSEntityDescription insertNewObjectForEntityForName:@"Post"
@@ -125,8 +128,10 @@
     
     managedPost.postId = postId;
     managedPost.user = user;
+    managedPost.userId = user.userId;
     managedPost.title = title;
     managedPost.body = body;
+    managedPost.imageId = imageId;
     managedPost.creationDate = creationDate;
     
     NSError *error;

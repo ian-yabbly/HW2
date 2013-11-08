@@ -18,10 +18,19 @@
 
 - (void)createPostWithTitle:(NSString *)title
                     andBody:(NSString *)body
+                   andImage:(UIImage *)image
                   onSuccess:(void (^)(Post *post))successHandler;
 
-- (void)updatePost:(Post *)post;
+- (void)updatePost:(Post *)post withImage:(UIImage *)image;
 
 - (void)deletePost:(Post *)post;
+
+- (void)getSquareUserImageForUser:(NSNumber *)userId
+                        withWidth:(NSNumber *)width
+                        onSuccess:(void (^)(UIImage *image))successHandler;
+
+- (void)getSquareImageById:(NSString *)imageId
+                 withWidth:(NSNumber *)width
+                 onSuccess:(void (^)(UIImage *image))successHandler;
 
 @end

@@ -14,7 +14,7 @@
 @interface HW2RestClient : NSObject
 
 // TODO Can I make this "private"
-@property (nonatomic) NSString *baseUrl;
+@property (nonatomic) NSString *baseRestUrl, *baseImageUrl;
 @property (nonatomic) NSString *sessionId;
 @property (nonatomic) User *currentUser;
 
@@ -33,10 +33,18 @@
                     andBody:(NSString *)body
                   onSuccess:(void (^)(NSDictionary *json))successHandler;
 
-- (void)updatePost:(Post *)post onSuccess:(void (^)(NSDictionary *json))successHandler;
+- (void)updatePost:(Post *)post withImage:(UIImage *)image onSuccess:(void (^)(NSDictionary *json))successHandler;
 
 - (void)deletePost:(Post *)post onSuccess:(void (^)(Post *deletedPost))successHandler;
 
 - (void)doWithUser:(void (^)(User *user))fn;
+
+- (void)getSquareUserImageForUser:(NSNumber *)userId
+                        withWidth:(NSNumber *)width
+                        onSuccess:(void (^)(UIImage *image))successHandler;
+
+- (void)getSquareImageById:(NSString *)imageId
+                        withWidth:(NSNumber *)width
+                        onSuccess:(void (^)(UIImage *image))successHandler;
 
 @end

@@ -11,15 +11,15 @@
 #import "Post.h"
 #import "User.h"
 
-@interface HW2PostFormViewController : UIViewController
+@interface HW2PostFormViewController : UIViewController <UIActionSheetDelegate>
 
-@property (nonatomic) IBOutlet UITextField *fieldTitle;
-
-@property (nonatomic) IBOutlet UITextView *fieldBody;
+@property (nonatomic, weak) IBOutlet UITextField *fieldTitle;
+@property (nonatomic, weak) IBOutlet UITextView *fieldBody;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
 
 @property (nonatomic) User *author;
-
 @property (nonatomic) Post *post;
+@property (nonatomic) BOOL newImageSelected;
 
 - (IBAction)saveTapped:(id)sender;
 

@@ -12,6 +12,10 @@
 
 @interface HW2PostTableViewCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel, *titleLabel;
+@property (nonatomic, weak) IBOutlet UITextView *bodyTextView;
+@property (nonatomic, weak) IBOutlet UIImageView *userImageView;
+
 @property (nonatomic) Post *post;
 
 @end

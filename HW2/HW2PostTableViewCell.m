@@ -7,7 +7,9 @@
 //
 
 #import "HW2PostTableViewCell.h"
-#import "UIColor+Extra.h"
+#import "HW2ModelCoordinator.h"
+#import "User.h"
+#import "Post.h"
 
 @implementation HW2PostTableViewCell
 
@@ -33,8 +35,18 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMM d, yyyy HH:mm"];
     _post = post;
-    self.textLabel.text = post.title;
-    self.detailTextLabel.text = [dateFormatter stringFromDate:post.creationDate];
+    
+    self.titleLabel.text = post.title;
+    self.bodyTextView.text = post.body;
+    self.nameLabel.text = post.user.name;
+    
+    NSNumber *userImageWidth = [NSNumber numberWithInt:_userImageView.frame.size.width];
+    
+    [[HW2ModelCoordinator singletonInstance] getSquareUserImageForUser:self.post.user.userId
+                                                             withWidth:userImageWidth
+                                                             onSuccess:^(UIImage *image) {
+                                                                 _userImageView.image = image;
+                                                             }];
 }
 
 @end

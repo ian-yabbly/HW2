@@ -38,8 +38,10 @@
 		3C89FC851818C1CE00E954C2 /* HW2PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC841818C1CE00E954C2 /* HW2PostTableViewController.m */; };
 		3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */; };
 		3C8AABBB181CC63900C25F63 /* UIColor+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */; };
-		3CD6741F182A1FDF006E1A33 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6741E182A1FDF006E1A33 /* User.m */; };
-		3CD67422182A1FDF006E1A33 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD67421182A1FDF006E1A33 /* Post.m */; };
+		3CD67425182AAB68006E1A33 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD67424182AAB68006E1A33 /* User.m */; };
+		3CD67428182AAB69006E1A33 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD67427182AAB69006E1A33 /* Post.m */; };
+		3CD6742B182BF745006E1A33 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6742A182BF745006E1A33 /* base64.c */; };
+		3CD6742E182BF85E006E1A33 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD6742D182BF85E006E1A33 /* NSData+Base64.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,10 +109,14 @@
 		3C89FC871818C31E00E954C2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3C8AABB9181CC63900C25F63 /* UIColor+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extra.h"; path = "../UIColor+Extra.h"; sourceTree = "<group>"; };
 		3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extra.m"; path = "../UIColor+Extra.m"; sourceTree = "<group>"; };
-		3CD6741D182A1FDF006E1A33 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		3CD6741E182A1FDF006E1A33 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		3CD67420182A1FDF006E1A33 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
-		3CD67421182A1FDF006E1A33 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		3CD67423182AAB68006E1A33 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3CD67424182AAB68006E1A33 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3CD67426182AAB69006E1A33 /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		3CD67427182AAB69006E1A33 /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		3CD67429182BF72C006E1A33 /* base64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
+		3CD6742A182BF745006E1A33 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
+		3CD6742C182BF85E006E1A33 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		3CD6742D182BF85E006E1A33 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,13 +221,17 @@
 				3C8AABB9181CC63900C25F63 /* UIColor+Extra.h */,
 				3C8AABBA181CC63900C25F63 /* UIColor+Extra.m */,
 				3C89FC571818BCC400E954C2 /* Main.storyboard */,
+				3CD67423182AAB68006E1A33 /* User.h */,
+				3CD67426182AAB69006E1A33 /* Post.h */,
+				3CD67427182AAB69006E1A33 /* Post.m */,
+				3CD67424182AAB68006E1A33 /* User.m */,
 				3C89FC861818C31E00E954C2 /* Model.xcdatamodeld */,
-				3CD6741D182A1FDF006E1A33 /* User.h */,
-				3CD6741E182A1FDF006E1A33 /* User.m */,
-				3CD67420182A1FDF006E1A33 /* Post.h */,
-				3CD67421182A1FDF006E1A33 /* Post.m */,
 				3C89FC5A1818BCC400E954C2 /* HW2ViewController.h */,
 				3C89FC5B1818BCC400E954C2 /* HW2ViewController.m */,
+				3CD67429182BF72C006E1A33 /* base64.h */,
+				3CD6742A182BF745006E1A33 /* base64.c */,
+				3CD6742C182BF85E006E1A33 /* NSData+Base64.h */,
+				3CD6742D182BF85E006E1A33 /* NSData+Base64.m */,
 				3C89FC5D1818BCC400E954C2 /* Images.xcassets */,
 				3C89FC4C1818BCC400E954C2 /* Supporting Files */,
 			);
@@ -356,12 +366,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C13A596181E195A00DF3736 /* AFHTTPRequestOperation.m in Sources */,
+				3CD6742B182BF745006E1A33 /* base64.c in Sources */,
 				3C13A56D181E184300DF3736 /* HW2RestClient.m in Sources */,
 				3C13A59E181E195A00DF3736 /* AFURLSessionManager.m in Sources */,
 				3C89FC5C1818BCC400E954C2 /* HW2ViewController.m in Sources */,
+				3CD6742E182BF85E006E1A33 /* NSData+Base64.m in Sources */,
 				3C13A59B181E195A00DF3736 /* AFURLConnectionOperation.m in Sources */,
 				3C13A597181E195A00DF3736 /* AFHTTPRequestOperationManager.m in Sources */,
-				3CD6741F182A1FDF006E1A33 /* User.m in Sources */,
+				3CD67425182AAB68006E1A33 /* User.m in Sources */,
 				3C89FC561818BCC400E954C2 /* HW2AppDelegate.m in Sources */,
 				3C13A599181E195A00DF3736 /* AFNetworkReachabilityManager.m in Sources */,
 				3C89FC881818C31E00E954C2 /* Model.xcdatamodeld in Sources */,
@@ -374,7 +386,7 @@
 				3C13A59D181E195A00DF3736 /* AFURLResponseSerialization.m in Sources */,
 				3C89FC521818BCC400E954C2 /* main.m in Sources */,
 				3C89FC851818C1CE00E954C2 /* HW2PostTableViewController.m in Sources */,
-				3CD67422182A1FDF006E1A33 /* Post.m in Sources */,
+				3CD67428182AAB69006E1A33 /* Post.m in Sources */,
 				3C13A598181E195A00DF3736 /* AFHTTPSessionManager.m in Sources */,
 				3C380FA7181B7DD5003E5FB6 /* HW2CoreDataPostModel.m in Sources */,
 			);

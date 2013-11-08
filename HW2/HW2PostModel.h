@@ -13,19 +13,21 @@
 @protocol HW2PostModel <NSObject>
 
 - (User *)createUserWithId:(NSNumber *)userId
-                     andEmail:(NSString *)email
-                 andFirstName:(NSString *)firstName
-                  andLastName:(NSString *)lastName
-                  andName:(NSString *)name;
+                  andEmail:(NSString *)email
+              andFirstName:(NSString *)firstName
+               andLastName:(NSString *)lastName
+                   andName:(NSString *)name
+                andImageId:(NSString *)imageId;
 
 - (User *)findUserByName:(NSString *)name;
-- (User *)findUserById:(long)userId;
+- (User *)findUserById:(NSNumber *)userId;
 - (NSArray *)findAllUsers;
 
 - (Post *)createPostWithId:(NSNumber *)postId
                  andUser:(User *)user
                   andTitle:(NSString *)title
                    andBody:(NSString *)body
+                andImageId:(NSString *)imageId
            andCreationDate:(NSDate *)creationDate;
 
 - (void)deletePost:(Post *)post;
